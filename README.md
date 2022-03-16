@@ -1,4 +1,4 @@
-#Ohjelmistotekniikka, harjoitustyö
+# Ohjelmistotekniikka, harjoitustyö
 
 Repo **ot kurssia** varten  
 
