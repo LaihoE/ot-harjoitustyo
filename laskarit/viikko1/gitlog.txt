@@ -34,6 +34,8 @@ commit 44144007a4142c6e4a9f930957a9c8da6e55ec85
 Author: Laiho <emillaiho@hotmail.fi>
 Date:   Wed Mar 16 18:54:41 2022 +0200
 
+pieni muutos
+
     rename tiedosto -> eka
 
  eka.txt    | 14 ++++++++++++++
