@@ -26,7 +26,7 @@ takia, jätetään se pois tällä kurssilla. Generoin siis valmiiksi joitain CS
 testaamiseen. 
 
 ## Käyttöliittymä
-
+![](./kuvat/kayttoliittyma.png)
 
 ## Käyttäjät
 
