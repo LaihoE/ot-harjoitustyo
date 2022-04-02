@@ -10,12 +10,15 @@
     class Pelilauta{
     }
     class Pelaaja{
+        pelinappula
     }
     class Noppa{
-
+        arvo
+        roll()
     }
     class Ruutu{
-
+        pelinappulat
+        seuraava
     }
     class Pelinappula{
     }
