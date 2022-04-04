@@ -13,7 +13,6 @@ class Model:
     def __init__(self, model_path):
         # init ml_model
         self.ort_session = onnxruntime.InferenceSession(model_path)
-        print(self.ort_session)
 
 
     def _load_csv_data(self, file_path):
@@ -37,12 +36,14 @@ class Model:
 
         # We scale the data for better model performance (not important to understand),
         # if interested see more: https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html 
-        scaler = joblib.load('utils/scaler.gz')
+        dirname = os.path.dirname(__file__)
+        scaler = joblib.load(os.path.join(dirname, 'utils', 'scaler.gz'))
         ml_data = scaler.transform(ml_data.reshape(-1, 5)).reshape(-1, 192, 5)
         
         return ml_data, other_data
 
     def _predict(self, file_path ,batch_size):
+        print("Reading data...")
         csv_data = self._load_csv_data(file_path)
         ml_data, other_data = self._transform_data(csv_data)
         
@@ -51,10 +52,10 @@ class Model:
         # We need to do the predictions in batches to not run out of ram/vram
         # The predictions list will be the same length as the rest of the data
         # allowing easy indexing of them all
+        print("Starting predictions...")
         for batch in range(total_batches):
             # Slice current batch
             data_this_batch = ml_data[batch_size * batch: batch_size * batch + batch_size, :, :]
-            print(data_this_batch.shape, data_this_batch.dtype)
             # Prep the data for input into ml model
             ort_inputs = {self.ort_session.get_inputs()[0].name: data_this_batch}
             # Does the actual prediction
@@ -64,7 +65,7 @@ class Model:
             # Add batch to predictions list
             predictions.extend(cheating_confidence)
         predictions = np.array(predictions)
-
+        print("Predictions done")
         # Add predictions to other data
         # Now we dont need the ml_data anymore
         other_data["predictions"] = predictions
@@ -89,8 +90,3 @@ class Model:
                       data_dict["ticks"][shot],"\t",
                       data_dict["file_names"][shot])
                       
-                      
-if __name__ == "__main__":
-    model_path = './models/ml_model.onnx'
-    m = Model(model_path)
-    m.predict_to_terminal("./csvs/data.csv")

@@ -11,6 +11,8 @@ pandas = "^1.4.2"
 onnxruntime = "^1.11.0"
 joblib = "^1.1.0"
 pytest = "^7.1.1"
+coverage = "^6.3.2"
+invoke = "^1.7.0"
 
 [tool.poetry.dev-dependencies]
 
