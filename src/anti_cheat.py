@@ -39,8 +39,11 @@ class Model:
         dirname = os.path.dirname(__file__)
         path_to_scaler = os.path.join(dirname, 'utils', 'scaler.gz')
         scaler = joblib.load(path_to_scaler)
-        # Reshape data into 2d and back to 3d after scaling (pylint false-positive?)
-        ml_data = ml_data.reshape((-1, 5))  # pylint: disable=E1121
+
+        # Reshape data into 2d and back to 3d after scaling.      
+        # Pylint seems to complain about this one (false-positive?)
+        # You didn't seem to like pylint: disables so i left it in
+        ml_data = ml_data.reshape((-1, 5))
         ml_data = scaler.transform(ml_data)
         ml_data = ml_data.reshape((-1, 192, 5))
 
@@ -61,8 +64,8 @@ class Model:
             data_this_batch = ml_data[batch_size *
                                       batch: batch_size * batch + batch_size, :, :]
             # Prep the data for input into ml model
-            ort_inputs = {self.ort_session.get_inputs()[
-                0].name: data_this_batch}
+            ort_inputs = {self.ort_session.get_inputs()
+                [0].name: data_this_batch}
             # Does the actual prediction
             ort_outs = np.array(self.ort_session.run(None, ort_inputs))
             # index the cheating conf

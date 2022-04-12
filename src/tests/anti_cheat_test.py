@@ -5,7 +5,7 @@ import os
 
 
 class TestModel(unittest.TestCase):
-    def setup():
+    def setUp(self):
         pass
 
     def test_model_initialized_succesful(self):
@@ -21,3 +21,4 @@ class TestModel(unittest.TestCase):
         # Make sure the model gives expected confidence. Round to 5 decimals due to margin of error
         self.assertEqual(round(np.float32(cheating_confidence[0]), 5), round(
             np.float32(0.03877572), 5))
+
