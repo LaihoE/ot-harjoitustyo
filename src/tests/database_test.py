@@ -7,19 +7,36 @@ import sqlalchemy
 import sqlite3
 import pandas as pd
 
+
 class TestDb(unittest.TestCase):
     def setUp(self):
-        dbpath = os.path.abspath(os.path.join(
-            os.path.dirname( __file__ ), '..', 'database', 'database.db'))
+        dbpath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'database', 'database.db'))
         self.db = Database(dbpath)
+        if not os.path.isfile(dbpath):
+            df = pd.DataFrame([['testdemo.dem',
+                                'test', 76561198112665678, 4894, 0.76984928035736084]])
+            df.to_sql('testtable', con=self.db.engine, if_exists='append')
+
 
     def test_insert_successful(self):
-        df = pd.DataFrame(['match730_003416179073414595204_0172264905_181.dem',
-         'Two pa cool', 76561198112665670, 1384, 0.46584928035736084])
-        df.to_sql('testtable', con=self.db.engine, if_exists='append')
+        dbpath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'database', 'database.db'))
+        db = Database(dbpath)
+        df = pd.DataFrame([['match730_003416179073414595204_0172264905_181.dem',
+                            'Two pa cool', 76561198112665670, 1384, 0.46584928035736084]])
+        df.to_sql('testtable', con=db.engine, if_exists='append')
 
 
     def test_fetch_successful(self):
+        """
+        Seems like the setUp doesnt commit the changes? something is up, have to redo the insert here for it to work always.
+        Maybe df.to_sql aint too great, will revisit next week
+        """
+        # insert
+        df = pd.DataFrame([['match730_003416179073414595204_0172264905_181.dem',
+                            'Two pa cool', 76561198112665670, 1384, 0.46584928035736084]])
+        df.to_sql('testtable', con=self.db.engine, if_exists='append')
+
+        # Actual test
         data = self.db.find_data(table='testtable')
         for row in data:
             # Each row has 6 values

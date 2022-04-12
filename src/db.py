@@ -5,9 +5,6 @@ import os.path
 
 class Database():
     def __init__(self, db_path) -> None:
-        
-        # if not os.path.isfile(db_path):
-
         self.conn = sqlite3.connect(db_path)
         self.engine = sqlalchemy.create_engine(
             f'sqlite:///{db_path}', echo=False)
