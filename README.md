@@ -12,7 +12,8 @@ poetry install
 ```bash
 poetry run invoke start
 ```
-Tämän pitäisi antaa terminaaliin ennustuksia. Mikäli kaikki sujuu kuten pitäisi, tulisi näkyä seuraavanlaisia rivejä:
+Tämän pitäisi avata file explorer jolla pysyt navigoimaan src/csvs kansioon 
+ja valita csv tiedoston. Tämän jälkeen terminaaliin pitäisi ilmestyä ennustuksia. Mikäli kaikki sujuu kuten pitäisi, tulisi näkyä seuraavanlaisia rivejä:
 
 ```python
 Confidence               Name                 STEAMID              Tick                       Demo
