@@ -1,7 +1,7 @@
 import os
 from anti_cheat import Model
-from ui import UI
+from ui import gui
 
 if __name__ == '__main__':
-    u = UI()
+    u = gui.UI()
     u.start()
