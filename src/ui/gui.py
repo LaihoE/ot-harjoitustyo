@@ -13,7 +13,7 @@ class UI:
     def __init__(self):
         # init model
         dirname = os.path.dirname(__file__)
-        model_path = os.path.join(dirname, 'utils', 'ml_model.onnx')
+        model_path = os.path.join(dirname, '..' , 'utils', 'ml_model.onnx')
         self.model = Model(model_path)
         # Init tkinter
         self.root = tk.Tk()
