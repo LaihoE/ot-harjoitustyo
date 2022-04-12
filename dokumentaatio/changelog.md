@@ -6,3 +6,4 @@
   
 ## Viikko 4
 - Tieto voidaan tallentaa sqlite tietokantaan, sekä saada se sieltä ulos
+- Käyttäjälle aukeaa file explorer josta voi valita csv tiedoston
