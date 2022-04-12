@@ -1,7 +1,6 @@
 import sqlite3
 import sqlalchemy
 import pandas as pd
-import os.path
 
 class Database():
     def __init__(self, db_path) -> None:
