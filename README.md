@@ -38,3 +38,4 @@ poetry run invoke coverage-report
 - [Vaatimusmäärittely](./dokumentaatio/vaatimusmaarittely.md)
 - [Tuntikirjanpito](./dokumentaatio/tuntikirjanpito.md)
 - [Changelog](./dokumentaatio/changelog.md)
+- [Arkkitehtuuri](./dokumentaatio/arkkitehtuuri.md)
