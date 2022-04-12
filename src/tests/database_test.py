@@ -20,14 +20,14 @@ class TestDb(unittest.TestCase):
 
 
     def test_fetch_successful(self):
-        data = self.db.find_data()
+        data = self.db.find_data(table='testtable')
         for row in data:
             # Each row has 6 values
             self.assertEqual(len(row), 6)
             # Tick is an integer
             self.assertEqual(type(row[-2]), int)
             # Steamid is correct
-            self.assertEqual(len(str(row[3])),len('76561198978973136'))
+            self.assertEqual(len(str(row[3])), len('76561198978973136'))
             self.assertEqual(str(row[3])[:3], '765')
             # Probablity (confidence) is between 0 and 1
             self.assertEqual(0 < row[-1] < 1, True)

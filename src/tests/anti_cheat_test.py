@@ -11,7 +11,7 @@ class TestModel(unittest.TestCase):
     def test_model_initialized_succesful(self):
         # init model
         dirname = os.path.dirname(__file__)
-        model_path = os.path.join(dirname, '..', 'models', 'ml_model.onnx')
+        model_path = os.path.join(dirname, '..', 'utils', 'ml_model.onnx')
         model = Model(model_path)
         # Create correct shape array of ones and predict (1 sample with 192 rows and 5 columns)
         testdata = np.float32(np.ones((1, 192, 5)))
