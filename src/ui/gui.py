@@ -44,6 +44,8 @@ class UI:
         self.root.mainloop()
         if self.filename is not None:
             self.model.predict_to_terminal(self.filename)
+        else:
+            raise FileExistsError("No file selected!")
 
 
 if __name__ == '__main__':
