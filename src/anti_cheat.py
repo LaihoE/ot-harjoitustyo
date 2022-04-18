@@ -40,9 +40,9 @@ class Model:
         path_to_scaler = os.path.join(dirname, 'utils', 'scaler.gz')
         scaler = joblib.load(path_to_scaler)
 
-        # Reshape data into 2d and back to 3d after scaling.      
+        # Reshape data into 2d and back to 3d after scaling.
         # Pylint seems to complain about this one (false-positive?)
-        # You didn't seem to like pylint: disables so i left it in
+        # Disabling pylint lines wasn't liked so i left it in
         ml_data = ml_data.reshape((-1, 5))
         ml_data = scaler.transform(ml_data)
         ml_data = ml_data.reshape((-1, 192, 5))
@@ -101,5 +101,8 @@ class Model:
 
     def predict_to_sql(self, file_name, batch_size=1000):
         data_dict = self._predict(file_name, batch_size)
-        database = Database()
+
+        dirname = os.path.dirname(__file__)
+        path_to_db = os.path.join(dirname, 'database', 'database.db')
+        database = Database(path_to_db)
         database.insert_prediction(data_dict)
