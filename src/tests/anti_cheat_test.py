@@ -22,3 +22,10 @@ class TestModel(unittest.TestCase):
         self.assertEqual(round(np.float32(cheating_confidence[0]), 5), round(
             np.float32(0.03877572), 5))
 
+    def test_predict_to_sql(self):
+        dirname = os.path.dirname(__file__)
+        model_path = os.path.join(dirname, '..', 'utils', 'ml_model.onnx')
+        csv_path = os.path.join(dirname, '..', 'csvs', 'data.csv')
+
+        model = Model(model_path)
+        model.predict_to_sql(csv_path)

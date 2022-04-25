@@ -17,14 +17,12 @@ class TestDb(unittest.TestCase):
                                 'test', 76561198112665678, 4894, 0.76984928035736084]])
             df.to_sql('testtable', con=self.db.engine, if_exists='append')
 
-
     def test_insert_successful(self):
         dbpath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'database', 'database.db'))
         db = Database(dbpath)
         df = pd.DataFrame([['match730_003416179073414595204_0172264905_181.dem',
                             'Two pa cool', 76561198112665670, 1384, 0.46584928035736084]])
         df.to_sql('testtable', con=db.engine, if_exists='append')
-
 
     def test_fetch_successful(self):
         """
@@ -48,4 +46,3 @@ class TestDb(unittest.TestCase):
             self.assertEqual(str(row[3])[:3], '765')
             # Probablity (confidence) is between 0 and 1
             self.assertEqual(0 < row[-1] < 1, True)
-

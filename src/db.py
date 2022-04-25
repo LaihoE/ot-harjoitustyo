@@ -2,6 +2,7 @@ import sqlite3
 import sqlalchemy
 import pandas as pd
 
+
 class Database():
     def __init__(self, db_path) -> None:
         self.conn = sqlite3.connect(db_path)
@@ -9,8 +10,10 @@ class Database():
             f'sqlite:///{db_path}', echo=False)
 
     def find_data(self, table):
-        cursor = self.conn.execute(f'SELECT * FROM {table}')
-        return cursor
+        df = pd.read_sql(f'SELECT predictions, player_names, player_ids, file_names, ticks '
+                         f'FROM {table} ORDER BY predictions DESC',self.engine)
+        return df
+
 
     def insert_prediction(self, datadict):
         df = pd.DataFrame.from_dict(datadict)
