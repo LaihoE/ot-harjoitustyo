@@ -50,13 +50,11 @@ class TestDb(unittest.TestCase):
         data_dict["ticks"] = [1384]
         data_dict["file_names"] = ["match730_003416179073414595204_0172264905_181.dem"]
         df = pd.DataFrame.from_dict(data_dict)
-        print(df.columns)
         df.to_sql('testtable', con=db.engine, if_exists='append')
 
         # Actual test
         data = db.find_data(table='testtable')
         row = data.iloc[0].tolist()
-        print(row)
         # Each row has 6 values
         self.assertEqual(len(row), 5)
         # Tick is an integer
