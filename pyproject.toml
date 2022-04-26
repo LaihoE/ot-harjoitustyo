@@ -16,6 +16,7 @@ invoke = "^1.7.0"
 tk = "^0.1.0"
 matplotlib = "^3.5.1"
 SQLAlchemy = "^1.4.35"
+pandastable = "^0.12.2"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.13.5"
