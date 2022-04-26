@@ -2,7 +2,11 @@
 
 Deep Learning Anti-Cheat (DLAC) on projekti joka analysoi pelaajia CSGO pelissä ja ennustaa käyttääkö pelaaja jotain avustusta jota ei saisi. 
 
+## Uusin versio kokeiltu fuksiläppärillä 26.4
+
 ## Asennus
+- [Release viikko 5](https://github.com/LaihoE/ot-harjoitustyo/releases/tag/Viikko5)
+
 ```bash
 poetry install
 ```
