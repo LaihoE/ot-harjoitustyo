@@ -28,4 +28,4 @@ class TestModel(unittest.TestCase):
         csv_path = os.path.join(dirname, '..', 'csvs', 'data.csv')
 
         model = Model(model_path)
-        model.predict_to_sql(csv_path)
+        model.predict_to_sql(csv_path, 'testtable')

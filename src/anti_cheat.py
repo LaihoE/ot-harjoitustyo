@@ -105,4 +105,4 @@ class Model:
         dirname = os.path.dirname(__file__)
         path_to_db = os.path.join(dirname, 'database', 'database.db')
         database = Database(path_to_db)
-        database.insert_prediction(data_dict)
+        database.insert_prediction(data_dict, 'mytable')
