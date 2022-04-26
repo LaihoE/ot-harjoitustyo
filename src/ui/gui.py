@@ -14,6 +14,7 @@ class UI:
     This one might need some refreshing, just quickly implemented file explorer
     """
     def __init__(self):
+
         # init model
         dirname = os.path.dirname(__file__)
         model_path = os.path.join(dirname, '..', 'utils', 'ml_model.onnx')
@@ -51,20 +52,17 @@ class UI:
             raise FileExistsError("No file selected!")
 
 
-class DataVisualizer(Frame):
-        def __init__(self, parent=None):
-            Frame.__init__(self)
-            self.main = self.master
-            self.main.geometry('600x400+200+100')
-            self.main.title('Table app')
-            f = Frame(self.main)
-            f.pack(fill=BOTH, expand=1)
+    def generate_table(self):
+        root = tk.Tk()
+        f = Frame(root)
+        f.pack(fill=BOTH, expand=1)
 
-            dirname = os.path.dirname(__file__)
-            path_to_db = os.path.join(dirname, '..', 'database', 'database.db')
-            db = Database(path_to_db)
-            df = db.find_data('mytable')
+        dirname = os.path.dirname(__file__)
+        path_to_db = os.path.join(dirname, '..', 'database', 'database.db')
+        db = Database(path_to_db)
+        df = db.find_data('mytable')
 
-            self.table = pt = Table(f, dataframe=df,
-                                    showtoolbar=True, showstatusbar=True)
-            pt.show()
+        self.table = Table(f, dataframe=df,
+                                showtoolbar=True, showstatusbar=True)
+        self.table.show()
+        root.mainloop()

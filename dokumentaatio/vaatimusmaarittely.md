@@ -33,13 +33,13 @@ testaamiseen.
 Käyttäjiä on näillä näkymin vain yksi, normaali käyttäjä.
 
 ## Perusversion tarjoama toiminnallisuus
-- Käyttäjä voi GUI:n avulla valita tiedoston mitä analysoi
-- Ennustukset menevät tietokantaan (sqlite)
-- Käyttäjän vanhat ennustukset näkyvät "my predictions" osan alta
-- Käyttäjä voi valita siirtääkö ennustuksen "my predictions" osaan, vai poistaako sen
+- [x] Käyttäjä voi GUI:n avulla valita tiedoston mitä analysoi
+- [x] Ennustukset menevät tietokantaan (sqlite)
+- [x] Ennustukset haetaan tietokannasta
+- [] Käyttäjän vanhat ennustukset näkyvät "my predictions" osan alta
+- [] Käyttäjä voi valita siirtääkö ennustuksen "my predictions" osaan, vai poistaako sen
 
 ## Jatkokehitysideoita
 - Mahdollinen login
 - "My predictions":iin lisää toiminnallisuutta esim. joitain filtereitä
 - "My predictions":iin mahdollisuus lisätä kommentteja
-- Loading bar
