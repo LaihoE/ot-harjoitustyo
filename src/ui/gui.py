@@ -3,10 +3,10 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog as fd
 import os
-from anti_cheat import Model
+from ..anti_cheat import Model
 from tkinter import *
 from pandastable import Table, TableModel
-from db import Database
+from ..db import Database
 
 
 class UI:

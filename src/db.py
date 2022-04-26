@@ -12,9 +12,9 @@ class Database():
     def find_data(self, table):
         df = pd.read_sql(f'SELECT predictions, player_names, player_ids, file_names, ticks '
                          f'FROM {table} ORDER BY predictions DESC',self.engine)
+        print(df.columns)
         return df
 
-
-    def insert_prediction(self, datadict):
+    def insert_prediction(self, datadict, table):
         df = pd.DataFrame.from_dict(datadict)
-        df.to_sql('mytable', con=self.engine, if_exists='append')
+        df.to_sql(table, con=self.engine, if_exists='append')
