@@ -11,17 +11,28 @@ import pandas as pd
 class TestDb(unittest.TestCase):
     def setUp(self):
         dbpath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'database', 'database.db'))
-        self.db = Database(dbpath)
+        db = Database(dbpath)
         if not os.path.isfile(dbpath):
-            df = pd.DataFrame([['testdemo.dem',
-                                'test', 76561198112665678, 4894, 0.76984928035736084]])
-            df.to_sql('testtable', con=self.db.engine, if_exists='append')
+            data_dict = {}
+            data_dict["predictions"] = [0.46584928035736084]
+            data_dict["player_names"] = ["Two pa cool"]
+            data_dict["player_ids"] = [76561198112665670]
+            data_dict["ticks"] = [1384]
+            data_dict["file_names"] = ["match730_003416179073414595204_0172264905_181.dem"]
+            df = pd.DataFrame.from_dict(data_dict)
+            df.to_sql('testtable', con=db.engine, if_exists='append')
 
     def test_insert_successful(self):
         dbpath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'database', 'database.db'))
         db = Database(dbpath)
-        df = pd.DataFrame([['match730_003416179073414595204_0172264905_181.dem',
-                            'Two pa cool', 76561198112665670, 1384, 0.46584928035736084]])
+
+        data_dict = {}
+        data_dict["predictions"] = [0.46584928035736084]
+        data_dict["player_names"] = ["Two pa cool"]
+        data_dict["player_ids"] = [76561198112665670]
+        data_dict["ticks"] = [1384]
+        data_dict["file_names"] = ["match730_003416179073414595204_0172264905_181.dem"]
+        df = pd.DataFrame.from_dict(data_dict)
         df.to_sql('testtable', con=db.engine, if_exists='append')
 
     def test_fetch_successful(self):
@@ -30,19 +41,28 @@ class TestDb(unittest.TestCase):
         Maybe df.to_sql aint too great, will revisit next week
         """
         # insert
-        df = pd.DataFrame([['match730_003416179073414595204_0172264905_181.dem',
-                            'Two pa cool', 76561198112665670, 1384, 0.46584928035736084]])
-        df.to_sql('testtable', con=self.db.engine, if_exists='append')
+        dbpath = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'database', 'database.db'))
+        db = Database(dbpath)
+        data_dict = {}
+        data_dict["predictions"] = [0.46584928035736084]
+        data_dict["player_names"] = ["Two pa cool"]
+        data_dict["player_ids"] = [76561198112665670]
+        data_dict["ticks"] = [1384]
+        data_dict["file_names"] = ["match730_003416179073414595204_0172264905_181.dem"]
+        df = pd.DataFrame.from_dict(data_dict)
+        print(df.columns)
+        df.to_sql('testtable', con=db.engine, if_exists='append')
 
         # Actual test
-        data = self.db.find_data(table='testtable')
-        for row in data:
-            # Each row has 6 values
-            self.assertEqual(len(row), 6)
-            # Tick is an integer
-            self.assertEqual(type(row[-2]), int)
-            # Steamid is correct
-            self.assertEqual(len(str(row[3])), len('76561198978973136'))
-            self.assertEqual(str(row[3])[:3], '765')
-            # Probablity (confidence) is between 0 and 1
-            self.assertEqual(0 < row[-1] < 1, True)
+        data = db.find_data(table='testtable')
+        row = data.iloc[0].tolist()
+        print(row)
+        # Each row has 6 values
+        self.assertEqual(len(row), 5)
+        # Tick is an integer
+        self.assertEqual(type(int(row[-1])), int)
+        # Steamid is correct
+        self.assertEqual(len(str(row[2])), len('76561198978973136'))
+        self.assertEqual(str(row[2])[:3], '765')
+        # Probablity (confidence) is between 0 and 1
+        self.assertEqual(0 < float(row[0]) < 1, True)
