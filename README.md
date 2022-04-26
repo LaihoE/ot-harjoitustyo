@@ -13,14 +13,12 @@ poetry install
 poetry run invoke start
 ```
 Tämän pitäisi avata file explorer jolla pysyt navigoimaan src/csvs kansioon 
-ja valita csv tiedoston. Tämän jälkeen terminaaliin pitäisi ilmestyä ennustuksia. Mikäli kaikki sujuu kuten pitäisi, tulisi näkyä seuraavanlaisia rivejä:
+ja valita csv tiedosto. Parin sekunnin jälkeen pitäisi avautua seuraavanlainen ikkuna:
+![](./dokumentaatio/kuvat/example_output.png)
 
-```python
-Confidence               Name                 STEAMID              Tick                       Demo
-0.99811625       公雞Im💕Ur💕Crush公雞   76561199056381450       47400   match730_003418900824254841096_1146197551_182.dem
-...
-```
-Voimme käydä tarkistamassa pelaajan profiilin Steamin kautta:
+
+
+Voimme myös käydä tarkistamassa pelaajan profiilin Steamin kautta:
 https://steamcommunity.com/profiles/76561199056381450/
 
 Kappas vaan, pelaajalla on pelikielto sopivasti pelin aikoihin...
