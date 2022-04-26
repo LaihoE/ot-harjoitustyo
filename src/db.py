@@ -12,7 +12,6 @@ class Database():
     def find_data(self, table):
         df = pd.read_sql(f'SELECT predictions, player_names, player_ids, file_names, ticks '
                          f'FROM {table} ORDER BY predictions DESC',self.engine)
-        print(df.columns)
         return df
 
     def insert_prediction(self, datadict, table):
