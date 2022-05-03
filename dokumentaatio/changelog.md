@@ -11,3 +11,6 @@
 # Viikko 5
 - Integraatio GUI:n ja tietokannan välille
 - Ennustukset menevät suoraan tietokantaan ja haetaan GUI:n avulla ulos
+
+# Viikko 6
+- Käyttäjä voi valita haluaako käyttää terminal varianttia vai normaalia GUI varianttia.

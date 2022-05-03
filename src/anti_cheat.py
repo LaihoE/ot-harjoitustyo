@@ -8,18 +8,32 @@ from db import Database
 
 
 class Model:
-
     def __init__(self, model_path):
-        # init ml_model
+        """
+        Initializes Machine-learning model
+
+        :param model_path:
+        """
         self.ort_session = onnxruntime.InferenceSession(model_path)
 
     def _load_csv_data(self, file_path):
         """
-        Reads csv
+        Loads csv file with pandas.
+
+        :param file_path:
+        :return: df
         """
         return pd.read_csv(file_path, header=None)
 
     def _transform_data(self, data):
+        """
+        Takes in raw csv-data and splits it into data that is used in the prediction
+        and into data that is only used in the end. The function also transforms the
+        prediction data.
+
+        :param data:
+        :return: ml_data, other data: ml data is a numpy array and other is dict
+        """
         # Data comes in rows of 1x1728 (rolled out to a row) so we unroll the data
         data = data.to_numpy().reshape(-1, 192, 9)
         # All the data isn't used for the prediction but will be needed later so we slice it here.
@@ -50,10 +64,21 @@ class Model:
         return ml_data, other_data
 
     def _predict(self, file_path, batch_size):
+        """
+        Does the actual prediction. Returns predictions combined with "other" data. Throws away
+        data used in prediction after it's done.
+        Predictions are done in batches to fit into RAM/VRAM
+
+
+        :param file_path: Path to csv file
+        :param batch_size: How many samples per prediction. Trade-off between memory and speed
+        :return: other_data: A dictionary containing predictions and data related to the predictions
+        """
+
         print("Reading data...")
         csv_data = self._load_csv_data(file_path)
         ml_data, other_data = self._transform_data(csv_data)
-        # We need to do the predictions in batches to not run out of ram/vram
+
         # The predictions list will be the same length as the rest of the data
         # allowing easy indexing of them all
         total_batches = math.ceil(ml_data.shape[0] / batch_size)
@@ -80,6 +105,15 @@ class Model:
         return other_data
 
     def predict_to_terminal(self, file_name, threshold=0.97, batch_size=1000):
+        """
+        Predicts and outputs the predictions to terminal.
+
+        :param file_name:
+        :param threshold:
+        :param batch_size: How many samples per prediction. Trade-off between memory and speed
+        :return: None
+        """
+
         data_dict = self._predict(file_name, batch_size)
         # Each key in data_dict is a feature for example who was the shooter or how likely the
         # player was to cheat during that shot. Each value in the dict is a list with the length
@@ -92,7 +126,6 @@ class Model:
         for shot in range(len(data_dict["predictions"])):
             # If the shot was highly likely to be cheating
             if data_dict["predictions"][shot] > threshold:
-                # Slice data for print
                 print(data_dict["predictions"][shot], "\t",
                       data_dict["player_names"][shot], "\t",
                       data_dict["player_ids"][shot], "\t",
@@ -100,6 +133,13 @@ class Model:
                       data_dict["file_names"][shot])
 
     def predict_to_sql(self, file_name, batch_size=1000):
+        """
+        Takes in a file name and creates the predictions and inserts them into SQL.
+
+        :param file_name: a csv file path
+        :param batch_size: How many samples per prediction. Trade-off between memory and speed
+        :return: success: True if everything works ok
+        """
         data_dict = self._predict(file_name, batch_size)
 
         dirname = os.path.dirname(__file__)

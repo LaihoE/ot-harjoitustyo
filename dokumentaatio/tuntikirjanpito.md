@@ -9,3 +9,5 @@
 | 12.4. | 4    | gui file explorer, dokumentaatio|
 | 18.4. | 5    | Tappelu GUI:n kanssa, integraatio tietokantaan|
 | 25.4. | 4    | Lisää tappelua GUI:n kanssa, lopuksi luovuttaminen ja simppelimi ratkaisu|
+| 2.5.  | 2    | Docstrings
+| 3.5.  | 3    | Terminal output mahdollisuus, release, käyttöohje
