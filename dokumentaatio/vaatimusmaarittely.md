@@ -26,20 +26,17 @@ takia, jätetään se pois tällä kurssilla. Generoin siis valmiiksi joitain CS
 testaamiseen. 
 
 ## Käyttöliittymä
-![](./kuvat/kayttoliittyma.png)
+![](./kuvat/kayttoliityma.png)
 
 ## Käyttäjät
 
 Käyttäjiä on näillä näkymin vain yksi, normaali käyttäjä.
 
 ## Perusversion tarjoama toiminnallisuus
-- [x] Käyttäjä voi GUI:n avulla valita tiedoston mitä analysoi
-- [x] Ennustukset menevät tietokantaan (sqlite)
-- [x] Ennustukset haetaan tietokannasta
-- [] Käyttäjän vanhat ennustukset näkyvät "my predictions" osan alta
-- [] Käyttäjä voi valita siirtääkö ennustuksen "my predictions" osaan, vai poistaako sen
+Aika/jaksaminen loppui hieman kesken ja toimivuus jäi paljon simppelimmäksi eli vain yksi ennustus kerrallaan eikä minkäänlaista historiaa (my predictions).
 
-## Jatkokehitysideoita
-- Mahdollinen login
-- "My predictions":iin lisää toiminnallisuutta esim. joitain filtereitä
-- "My predictions":iin mahdollisuus lisätä kommentteja
+- Käyttäjä voi GUI:n avulla valita tiedoston mitä analysoi
+- Ennustukset menevät tietokantaan (sqlite)
+- Ennustukset näkyvät GUI:ssa
+- Käyttäjän vanhat ennustukset näkyvät "my predictions" osan alta (ei valmistutut ikinä)
+- Käyttäjä voi valita siirtääkö ennustuksen "my predictions" osaan, vai poistaako sen (ei valmistutut ikinä)
